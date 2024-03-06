@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.mvc.book.model.dao.BookMapper">
+
+    <select id="selectAllBooks" resultType="com.ohgiraffers.mvc.book.model.dto.BookDTO">
+        SELECT
+            book_code,
+            book_name,
+            publisher,
+            release_date,
+            amount,
+            category_code,
+            loanable_yn
+        FROM
+            book_info
+    </select>
+
+    <select id="selectOne" resultType="com.ohgiraffers.mvc.book.model.dto.BookDTO">
+        SELECT
+            book_code,
+            book_name,
+            publisher,
+            release_date,
+            amount,
+            category_code,
+            loanable_yn
+        FROM
+            book_info
+        WHERE
+            book_code = #{ bookCode }
+    </select>
+
+    <insert id="insert">
+        INSERT
+        INTO book_info
+        (
+            book_name,
+            publisher,
+            release_date,
+            amount,
+            category_code,
+            loanable_yn
+        )
+        VALUES
+        (
+            #{ bookName },
+            #{ publisher },
+            #{ releaseDate },
+            #{ amount },
+            #{ categoryCode },
+            #{ loanableYN }
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE
+            book_info
+        SET
+            book_name = #{ bookName },
+            publisher = #{ publisher },
+            release_date = #{ releaseDate },
+            amount = #{ amount },
+            category_code = #{ categoryCode },
+            loanable_yn = #{ loanableYN }
+        WHERE
+            book_code = #{ bookCode }
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM
+            book_info
+        WHERE
+            book_code = #{ bookCode }
+    </delete>
+</mapper>
